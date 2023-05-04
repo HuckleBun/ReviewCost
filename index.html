@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Review Cost Calculator</title>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <!-- <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    /> -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
+    integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+  <script>
+    $(document).ready(function () {
+      // var docInput = $("input[id='firstInput']").val();
+      // $("input[type='radio']").click(function () {
+      //   var radioValue1 = $("input[name='optradio1']:checked").val();
+      //   if (radioValue1) {
+      //     $("#radioValue1").html(radioValue1);
+      //   }
+      // });
+
+      let total = 0;
+      let finalResult = 0;
+      $("#firstInput, #radio").change(function () {
+        let y = 0;
+        let x = Number($("#firstInput").val());
+        $("input[id='radio']:checked").each(function () {
+          y += +this.value;
+        });
+        total = x * y;
+      });
+      let total3 = 0;
+      $('#secondInput, input[name="optradio2"]').change(function () {
+        let total2 = 0;
+        let value1 = 3000;
+        let value2 = 4500;
+        let z = Number($("#secondInput").val());
+        let y2 = Number($("input[name='optradio2']:checked").val());
+        total2 = z * y2;
+        if (
+          $("input[name='optradio2']:checked")[0] ==
+          $("input[id='radio2']:checked")[0]
+        ) {
+          total3 = total2;
+        } else if (
+          $("input[name='optradio2']:checked")[0] ==
+          $("input[id='radio3']:checked")[0]
+        ) {
+          total3 = total2 + value1;
+        } else if (
+          $("input[name='optradio2']:checked")[0] ==
+          $("input[id='radio4']:checked")[0]
+        ) {
+          total3 = total2 + value2;
+        }
+      });
+      $('#secondInput, input[name="optradio2"]').change(function () {
+        finalResult = total + total3;
+        $("#estimateCost").val(Math.floor(finalResult));
+      });
+      $("#firstInput, #radio").change(function () {
+        finalResult = total + total3;
+        $("#estimateCost").val(Math.floor(finalResult));
+      });
+    });
+  </script>
+  <body>
+    <div id="estimateContainer">
+      <h1 id="estimateTitle">Estimate Your Document Review Costs</h1>
+    </div>
+
+    <section class="inputs">
+      <div>
+        <div class="docInput">
+          <label for="input1">Number of documents to review</label>
+          <input
+            id="firstInput"
+            name="input1"
+            type="text"
+            style="text-align: center"
+            placeholder="1000000"
+          />
+        </div>
+
+        <div class="attInput">
+          <label for="input2">Number of document review attorneys</label>
+          <input
+            id="secondInput"
+            name="input2"
+            type="text"
+            style="text-align: center"
+            placeholder="100"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- <section class="workflows row align-items-center no-gutters" id="randomOne">
+      <div class="col-3">
+        <h1 id="workflowText">Select Your Workflows</h1>
+      </div>
+      <div>
+        <div class="container">
+          <h5>First Pass Review</h5>
+          <input id="optRadio" type="radio" name="optradio1" value="0.7" />
+          <input id="optRadio" type="radio" name="optradio1" value="1" />
+          <input id="optRadio" type="radio" name="optradio1" value="1.9" />
+        </div>
+        <div class="container">
+          <h5>Doc Review Training</h5>
+          <input id="optRadio2" type="radio" name="optradio2" value="200" />
+          <input id="optRadio3" type="radio" name="optradio2" value="200" />
+          <input id="optRadio4" type="radio" name="optradio2" value="600" />
+        </div>
+        <div class="container">
+          <h5>Second Pass/Doc Review QC</h5>
+          <input id="optRadio" type="radio" name="optradio3" value="0.05" />
+          <input id="optRadio" type="radio" name="optradio3" value="0.35" />
+          <input id="optRadio" type="radio" name="optradio3" value="0.65" />
+        </div>
+        <div class="container">
+          <h5>Privilege Log</h5>
+          <input id="optRadio" type="radio" name="optradio4" value="0.02" />
+          <input id="optRadio" type="radio" name="optradio4" value="0.125" />
+          <input id="optRadio" type="radio" name="optradio4" value="0.275" />
+        </div>
+        <div class="container">
+          <h5>Redactions</h5>
+          <input id="optRadio" type="radio" name="optradio5" value="0.01" />
+          <input id="optRadio" type="radio" name="optradio5" value="0.1" />
+          <input id="optRadio" type="radio" name="optradio5" value="0.3" />
+        </div>
+        <div class="container">
+          <h5>Production QC</h5>
+          <input id="optRadio" type="radio" name="optradio6" value="0.01" />
+          <input id="optRadio" type="radio" name="optradio6" value="0.05" />
+          <input id="optRadio" type="radio" name="optradio6" value="0.15" />
+        </div>
+      </div>
+    </section> -->
+
+    <table>
+      <tr>
+        <th></th>
+        <th>Low</th>
+        <th>Average</th>
+        <th>High</th>
+      </tr>
+      <tr>
+        <td>First Pass Review</td>
+        <td>
+          <input id="radio" type="radio" name="row-1" data-col="1" /><i
+            class="fa-solid fa-circle-info"
+          ></i>
+        </td>
+        <td>
+          <input id="radio" type="radio" name="row-1" data-col="2" /><i
+            class="fa-solid fa-circle-info"
+          ></i>
+        </td>
+        <td>
+          <input id="radio" type="radio" name="row-1" data-col="3" /><i
+            class="fa-solid fa-circle-info"
+          ></i>
+        </td>
+      </tr>
+      <tr>
+        <td>Doc Review Training</td>
+        <td>
+          <input id="radio2" type="radio" name="row-2" data-col="1" /><i
+            class="fa-solid fa-circle-info"
+          ></i>
+        </td>
+        <td>
+          <input id="radio3" type="radio" name="row-2" data-col="2" /><i
+            class="fa-solid fa-circle-info"
+          ></i>
+        </td>
+        <td>
+          <input id="radio4" type="radio" name="row-2" data-col="3" /><i
+            class="fa-solid fa-circle-info"
+          ></i>
+        </td>
+      </tr>
+      <tr>
+        <td>Second Pass/Doc Review QC</td>
+        <td>
+          <input id="radio" type="radio" name="row-3" data-col="1" /><i
+            class="fa-solid fa-circle-info"
+          ></i>
+        </td>
+        <td>
+          <input id="radio" type="radio" name="row-3" data-col="2" /><i
+            class="fa-solid fa-circle-info"
+          ></i>
+        </td>
+        <td>
+          <input id="radio" type="radio" name="row-3" data-col="3" /><i
+            class="fa-solid fa-circle-info"
+          ></i>
+        </td>
+      </tr>
+      <tr>
+        <td>Privilege Log</td>
+        <td>
+          <input id="radio" type="radio" name="row-4" data-col="1" /><i
+            class="fa-solid fa-circle-info"
+          ></i>
+        </td>
+        <td>
+          <input id="radio" type="radio" name="row-4" data-col="2" /><i
+            class="fa-solid fa-circle-info"
+          ></i>
+        </td>
+        <td>
+          <input id="radio" type="radio" name="row-4" data-col="3" /><i
+            class="fa-solid fa-circle-info"
+          ></i>
+        </td>
+      </tr>
+      <tr>
+        <td>Redactions</td>
+        <td>
+          <input id="radio" type="radio" name="row-5" data-col="1" /><i
+            class="fa-solid fa-circle-info"
+          ></i>
+        </td>
+        <td>
+          <input id="radio" type="radio" name="row-5" data-col="2" /><i
+            class="fa-solid fa-circle-info"
+          ></i>
+        </td>
+        <td>
+          <input id="radio" type="radio" name="row-5" data-col="3" /><i
+            class="fa-solid fa-circle-info"
+          ></i>
+        </td>
+      </tr>
+      <tr>
+        <td>Production QC</td>
+        <td>
+          <input id="radio" type="radio" name="row-6" data-col="1" /><i
+            class="fa-solid fa-circle-info"
+          ></i>
+        </td>
+        <td>
+          <input id="radio" type="radio" name="row-6" data-col="2" /><i
+            class="fa-solid fa-circle-info"
+          ></i>
+        </td>
+        <td>
+          <input id="radio" type="radio" name="row-6" data-col="3" /><i
+            class="fa-solid fa-circle-info"
+          ></i>
+        </td>
+      </tr>
+    </table>
+
+    <section>
+      <div class="attInput">
+        <label for="estimateCost">Total Estimated Cost:</label>
+        <input
+          name="estimateCost"
+          id="estimateCost"
+          type="text"
+          style="text-align: center"
+          disabled
+        />
+      </div>
+    </section>
+  </body>
+  <footer></footer>
+</html>

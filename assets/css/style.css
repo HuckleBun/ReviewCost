@@ -1,0 +1,196 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body{
+  height: 100vh;
+  background-color: rgb(240, 240, 240) !important;
+} 
+
+#title {
+  text-align: center;
+}
+
+#titleBody {
+  text-align: center;
+}
+
+#estimateContainer {
+  margin: auto;
+  width: 85%;
+  margin-top: 1%;
+  border: 1px solid rgb(252, 250, 250);
+  border-radius: 7px;
+  background-color: rgba(44, 136, 217, 255) !important;
+  text-align: center;
+}
+
+#estimateTitle {
+  color: rgb(255, 255, 255);
+}
+
+.docInput {
+  margin: 20px auto;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.attInput {
+  margin: 20px auto;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+input:focus {
+  outline: none;
+  border-radius: 5px;
+  border: 2px solid rgba(44, 136, 217, 255)
+}
+
+input:focus::placeholder {
+  color: transparent;
+}
+
+label {
+  width: 100%;
+  background-color: white;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 5px;
+  border: 1px solid black;
+}
+
+/* label,input{
+  display:flex;
+  flex-direction:column;
+} */
+
+#workflowText {
+  text-align: center;
+  padding-bottom: 50px;
+  padding-top: 50px;
+}
+
+.workflows {
+  width: 100%;
+  background-color: white;
+  flex-direction: column;
+}
+
+/* .container {
+  display: flex;
+  height: 100px;
+  column-gap: 50px;
+  border: 1px solid black;
+} */
+
+/* h5 {
+  display: flex;
+  align-items: center;
+  flex: auto;
+} */
+
+table {
+  border-collapse: collapse;
+  margin: auto;
+}
+
+td, th {
+  border-bottom: 1px solid rgb(31, 31, 191);
+  padding: 30px;
+  text-align: center;
+}
+
+th:empty {
+  border: 0;
+}
+
+td:first-of-type {
+  width: 50%;
+}
+
+input[type=radio] {
+  width: 75px;
+  height: 75px;
+}
+
+/* .tooltip-text {
+    visibility: hidden;
+    position: absolute;
+    z-index: 2;
+    width: 100px;
+    color: white;
+    font-size: 12px;
+    background-color: #192733;
+    border-radius: 10px;
+    padding: 10px 15px 10px 15px;
+    white-space: pre;
+  }
+  
+  .tooltip-text::before {
+    content: "";
+    position: absolute;
+    transform: rotate(45deg);
+    background-color: #192733;
+    padding: 5px;
+    z-index: 1;
+  }
+  
+  .hover-text:hover .tooltip-text {
+    visibility: visible;
+  }
+  
+  #top {
+    top: -40px;
+    left: -50%;
+  }
+  
+  #top::before {
+    top: 80%;
+    left: 45%;
+  }
+  
+  #bottom {
+    top: 25px;
+    left: -50%;
+  }
+  
+  #bottom::before {
+    top: -5%;
+    left: 45%;
+  }
+  
+  #left {
+    top: -8px;
+    right: 120%;
+  }
+  
+  #left::before {
+    top: 35%;
+    left: 94%;
+  }
+  
+  #right {
+    top: -8px;
+    left: 120%;
+  }
+  
+  #right::before {
+    top: 35%;
+    left: -2%;
+  }
+  
+  .hover-text {
+    position: relative;
+    display: inline-block;
+    margin: 40px;
+    font-family: Avenir;
+    text-align: center;
+    user-select: none;
+  } */
