@@ -33,14 +33,6 @@
   ></script>
   <script>
     $(document).ready(function () {
-      // var docInput = $("input[id='firstInput']").val();
-      // $("input[type='radio']").click(function () {
-      //   var radioValue1 = $("input[name='optradio1']:checked").val();
-      //   if (radioValue1) {
-      //     $("#radioValue1").html(radioValue1);
-      //   }
-      // });
-
       let total = 0;
       let finalResult = 0;
       $("#firstInput, #radio").change(function () {
@@ -90,6 +82,10 @@
     <div id="estimateContainer">
       <h1 id="estimateTitle">Estimate Your Document Review Costs</h1>
     </div>
+
+    <!-- <div class="bubbly">
+      <input type="text" placeholder="100000" />
+    </div> -->
 
     <section class="inputs">
       <div>
@@ -169,111 +165,195 @@
         <th>High</th>
       </tr>
       <tr>
-        <td>First Pass Review</td>
+        <td style="font-weight: bold; font-size: larger">First Pass Review</td>
         <td>
-          <input id="radio" type="radio" name="row-1" data-col="1" /><i
-            class="fa-solid fa-circle-info"
-          ></i>
+          <input
+            id="radio"
+            type="radio"
+            name="row-1"
+            value="0.7"
+            data-col="1"
+          /><i class="tooltip-container fa-solid fa-circle-info">
+            <span class="tooltip-text"
+              >Assumes a document type mix and coding workflows that allow for
+              high rate of review. Assumes minimal issue codes. Typical of
+              primarily email reviews with minimal attachments and/or workflows
+              that allow for family coding. Rate of review assumption = 50+
+              documents/hour.</span
+            >
+          </i>
         </td>
         <td>
-          <input id="radio" type="radio" name="row-1" data-col="2" /><i
-            class="fa-solid fa-circle-info"
-          ></i>
+          <input
+            id="radio"
+            type="radio"
+            name="row-1"
+            value="1"
+            data-col="2"
+          /><i class="fa-solid fa-circle-info"></i>
         </td>
         <td>
-          <input id="radio" type="radio" name="row-1" data-col="3" /><i
-            class="fa-solid fa-circle-info"
-          ></i>
-        </td>
-      </tr>
-      <tr>
-        <td>Doc Review Training</td>
-        <td>
-          <input id="radio2" type="radio" name="row-2" data-col="1" /><i
-            class="fa-solid fa-circle-info"
-          ></i>
-        </td>
-        <td>
-          <input id="radio3" type="radio" name="row-2" data-col="2" /><i
-            class="fa-solid fa-circle-info"
-          ></i>
-        </td>
-        <td>
-          <input id="radio4" type="radio" name="row-2" data-col="3" /><i
-            class="fa-solid fa-circle-info"
-          ></i>
-        </td>
-      </tr>
-      <tr>
-        <td>Second Pass/Doc Review QC</td>
-        <td>
-          <input id="radio" type="radio" name="row-3" data-col="1" /><i
-            class="fa-solid fa-circle-info"
-          ></i>
-        </td>
-        <td>
-          <input id="radio" type="radio" name="row-3" data-col="2" /><i
-            class="fa-solid fa-circle-info"
-          ></i>
-        </td>
-        <td>
-          <input id="radio" type="radio" name="row-3" data-col="3" /><i
-            class="fa-solid fa-circle-info"
-          ></i>
+          <input
+            id="radio"
+            type="radio"
+            name="row-1"
+            value="1.9"
+            data-col="3"
+          /><i class="fa-solid fa-circle-info"></i>
         </td>
       </tr>
       <tr>
-        <td>Privilege Log</td>
-        <td>
-          <input id="radio" type="radio" name="row-4" data-col="1" /><i
-            class="fa-solid fa-circle-info"
-          ></i>
+        <td style="font-weight: bold; font-size: larger">
+          Doc Review Training
         </td>
         <td>
-          <input id="radio" type="radio" name="row-4" data-col="2" /><i
-            class="fa-solid fa-circle-info"
-          ></i>
+          <input
+            id="radio2"
+            type="radio"
+            name="row-2"
+            value="200"
+            data-col="1"
+          /><i class="fa-solid fa-circle-info"></i>
         </td>
         <td>
-          <input id="radio" type="radio" name="row-4" data-col="3" /><i
-            class="fa-solid fa-circle-info"
-          ></i>
-        </td>
-      </tr>
-      <tr>
-        <td>Redactions</td>
-        <td>
-          <input id="radio" type="radio" name="row-5" data-col="1" /><i
-            class="fa-solid fa-circle-info"
-          ></i>
+          <input
+            id="radio3"
+            type="radio"
+            name="row-2"
+            value="200"
+            data-col="2"
+          /><i class="fa-solid fa-circle-info"></i>
         </td>
         <td>
-          <input id="radio" type="radio" name="row-5" data-col="2" /><i
-            class="fa-solid fa-circle-info"
-          ></i>
-        </td>
-        <td>
-          <input id="radio" type="radio" name="row-5" data-col="3" /><i
-            class="fa-solid fa-circle-info"
-          ></i>
+          <input
+            id="radio4"
+            type="radio"
+            name="row-2"
+            value="600"
+            data-col="3"
+          /><i class="fa-solid fa-circle-info"></i>
         </td>
       </tr>
       <tr>
-        <td>Production QC</td>
-        <td>
-          <input id="radio" type="radio" name="row-6" data-col="1" /><i
-            class="fa-solid fa-circle-info"
-          ></i>
+        <td style="font-weight: bold; font-size: larger">
+          Second Pass/Doc Review QC
         </td>
         <td>
-          <input id="radio" type="radio" name="row-6" data-col="2" /><i
-            class="fa-solid fa-circle-info"
-          ></i>
+          <input
+            id="radio"
+            type="radio"
+            name="row-3"
+            value="0.05"
+            data-col="1"
+          /><i class="fa-solid fa-circle-info"></i>
         </td>
         <td>
-          <input id="radio" type="radio" name="row-6" data-col="3" /><i
-            class="fa-solid fa-circle-info"
-          ></i>
+          <input
+            id="radio"
+            type="radio"
+            name="row-3"
+            value="0.35"
+            data-col="2"
+          /><i class="fa-solid fa-circle-info"></i>
+        </td>
+        <td>
+          <input
+            id="radio"
+            type="radio"
+            name="row-3"
+            value="0.65"
+            data-col="3"
+          /><i class="fa-solid fa-circle-info"></i>
+        </td>
+      </tr>
+      <tr>
+        <td style="font-weight: bold; font-size: larger">Privilege Log</td>
+        <td>
+          <input
+            id="radio"
+            type="radio"
+            name="row-4"
+            value="0.02"
+            data-col="1"
+          /><i class="fa-solid fa-circle-info"></i>
+        </td>
+        <td>
+          <input
+            id="radio"
+            type="radio"
+            name="row-4"
+            value="0.125"
+            data-col="2"
+          /><i class="fa-solid fa-circle-info"></i>
+        </td>
+        <td>
+          <input
+            id="radio"
+            type="radio"
+            name="row-4"
+            value="0.275"
+            data-col="3"
+          /><i class="fa-solid fa-circle-info"></i>
+        </td>
+      </tr>
+      <tr>
+        <td style="font-weight: bold; font-size: larger">Redactions</td>
+        <td>
+          <input
+            id="radio"
+            type="radio"
+            name="row-5"
+            value="0.01"
+            data-col="1"
+          /><i class="fa-solid fa-circle-info"></i>
+        </td>
+        <td>
+          <input
+            id="radio"
+            type="radio"
+            name="row-5"
+            value="0.1"
+            data-col="2"
+          /><i class="fa-solid fa-circle-info"></i>
+        </td>
+        <td>
+          <input
+            id="radio"
+            type="radio"
+            name="row-5"
+            value="0.3"
+            data-col="3"
+          /><i class="fa-solid fa-circle-info"></i>
+        </td>
+      </tr>
+      <tr>
+        <td style="font-weight: bold; font-size: larger">Production QC</td>
+        <td>
+          <input
+            id="radio"
+            type="radio"
+            name="row-6"
+            value="0.01"
+            data-col="1"
+          /><i class="fa-solid fa-circle-info"></i>
+        </td>
+        <td>
+          <input
+            id="radio"
+            type="radio"
+            name="row-6"
+            value="0.05"
+            data-col="2"
+          /><i class="fa-solid fa-circle-info"></i>
+        </td>
+        <td>
+          <input
+            id="radio"
+            type="radio"
+            name="row-6"
+            value="0.15"
+            data-col="3"
+          /><i class="fa-solid fa-circle-info"></i>
         </td>
       </tr>
     </table>

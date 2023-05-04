@@ -6,7 +6,7 @@
 
 body{
   height: 100vh;
-  background-color: rgb(240, 240, 240) !important;
+  background-color: rgb(255, 255, 255) !important;
 } 
 
 #title {
@@ -29,6 +29,15 @@ body{
 
 #estimateTitle {
   color: rgb(255, 255, 255);
+}
+
+#estimateCost {
+    width: 50%;
+    height: 3rem;
+    padding: auto;
+    margin-bottom: 20px;
+    font-size: larger;
+    font-weight: bold;
 }
 
 .docInput {
@@ -66,11 +75,6 @@ label {
   border: 1px solid black;
 }
 
-/* label,input{
-  display:flex;
-  flex-direction:column;
-} */
-
 #workflowText {
   text-align: center;
   padding-bottom: 50px;
@@ -82,19 +86,6 @@ label {
   background-color: white;
   flex-direction: column;
 }
-
-/* .container {
-  display: flex;
-  height: 100px;
-  column-gap: 50px;
-  border: 1px solid black;
-} */
-
-/* h5 {
-  display: flex;
-  align-items: center;
-  flex: auto;
-} */
 
 table {
   border-collapse: collapse;
@@ -120,77 +111,22 @@ input[type=radio] {
   height: 75px;
 }
 
-/* .tooltip-text {
-    visibility: hidden;
-    position: absolute;
-    z-index: 2;
-    width: 100px;
-    color: white;
-    font-size: 12px;
-    background-color: #192733;
-    border-radius: 10px;
-    padding: 10px 15px 10px 15px;
-    white-space: pre;
-  }
-  
-  .tooltip-text::before {
-    content: "";
-    position: absolute;
-    transform: rotate(45deg);
-    background-color: #192733;
-    padding: 5px;
-    z-index: 1;
-  }
-  
-  .hover-text:hover .tooltip-text {
-    visibility: visible;
-  }
-  
-  #top {
-    top: -40px;
-    left: -50%;
-  }
-  
-  #top::before {
-    top: 80%;
-    left: 45%;
-  }
-  
-  #bottom {
-    top: 25px;
-    left: -50%;
-  }
-  
-  #bottom::before {
-    top: -5%;
-    left: 45%;
-  }
-  
-  #left {
-    top: -8px;
-    right: 120%;
-  }
-  
-  #left::before {
-    top: 35%;
-    left: 94%;
-  }
-  
-  #right {
-    top: -8px;
-    left: 120%;
-  }
-  
-  #right::before {
-    top: 35%;
-    left: -2%;
-  }
-  
-  .hover-text {
+.tooltip-container {
     position: relative;
     display: inline-block;
-    margin: 40px;
-    font-family: Avenir;
-    text-align: center;
-    user-select: none;
-  } */
+  }
+  
+  .tooltip-text {
+    visibility: hidden;
+    position: absolute;
+    background-color: rgb(87, 86, 86);
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    z-index: 1;
+    font-size: 15px;
+  }
+  
+  .tooltip-container:hover .tooltip-text {
+    visibility: visible;
+  }
