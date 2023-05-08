@@ -88,7 +88,7 @@
     </div> -->
 
     <section class="inputs">
-      <div>
+      <!-- <div>
         <div class="docInput">
           <label for="input1">Number of documents to review</label>
           <input
@@ -98,9 +98,23 @@
             style="text-align: center"
             placeholder="1000000"
           />
+        </div> -->
+
+        <div class="group">
+          <input type="text" required />
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label>Number of Documents to Review</label>
         </div>
 
-        <div class="attInput">
+        <div class="group">
+          <input type="text" required />
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label>Number of Document Review Attorneys</label>
+        </div>
+
+        <!-- <div class="attInput">
           <label for="input2">Number of document review attorneys</label>
           <input
             id="secondInput"
@@ -109,52 +123,17 @@
             style="text-align: center"
             placeholder="100"
           />
-        </div>
+        </div> -->
       </div>
     </section>
 
     <!-- <section class="workflows row align-items-center no-gutters" id="randomOne">
-      <div class="col-3">
-        <h1 id="workflowText">Select Your Workflows</h1>
-      </div>
-      <div>
-        <div class="container">
-          <h5>First Pass Review</h5>
-          <input id="optRadio" type="radio" name="optradio1" value="0.7" />
-          <input id="optRadio" type="radio" name="optradio1" value="1" />
-          <input id="optRadio" type="radio" name="optradio1" value="1.9" />
-        </div>
         <div class="container">
           <h5>Doc Review Training</h5>
           <input id="optRadio2" type="radio" name="optradio2" value="200" />
           <input id="optRadio3" type="radio" name="optradio2" value="200" />
           <input id="optRadio4" type="radio" name="optradio2" value="600" />
         </div>
-        <div class="container">
-          <h5>Second Pass/Doc Review QC</h5>
-          <input id="optRadio" type="radio" name="optradio3" value="0.05" />
-          <input id="optRadio" type="radio" name="optradio3" value="0.35" />
-          <input id="optRadio" type="radio" name="optradio3" value="0.65" />
-        </div>
-        <div class="container">
-          <h5>Privilege Log</h5>
-          <input id="optRadio" type="radio" name="optradio4" value="0.02" />
-          <input id="optRadio" type="radio" name="optradio4" value="0.125" />
-          <input id="optRadio" type="radio" name="optradio4" value="0.275" />
-        </div>
-        <div class="container">
-          <h5>Redactions</h5>
-          <input id="optRadio" type="radio" name="optradio5" value="0.01" />
-          <input id="optRadio" type="radio" name="optradio5" value="0.1" />
-          <input id="optRadio" type="radio" name="optradio5" value="0.3" />
-        </div>
-        <div class="container">
-          <h5>Production QC</h5>
-          <input id="optRadio" type="radio" name="optradio6" value="0.01" />
-          <input id="optRadio" type="radio" name="optradio6" value="0.05" />
-          <input id="optRadio" type="radio" name="optradio6" value="0.15" />
-        </div>
-      </div>
     </section> -->
 
     <table>
@@ -359,7 +338,7 @@
     </table>
 
     <section>
-      <div class="attInput">
+      <!-- <div class="attInput">
         <label for="estimateCost">Total Estimated Cost:</label>
         <input
           name="estimateCost"
@@ -368,6 +347,11 @@
           style="text-align: center"
           disabled
         />
+      </div> -->
+
+      <div style="display: flex">
+        <h1 class="totalCostText">Total Cost Estimate:</h1>
+        <h1 class="totalCostBox">$100,000</h1>
       </div>
     </section>
   </body>
