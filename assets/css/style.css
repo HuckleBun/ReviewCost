@@ -18,11 +18,7 @@ body{
 }
 
 #estimateContainer {
-  margin: auto;
-  width: 85%;
-  margin-top: 1%;
-  border: 1px solid rgb(252, 250, 250);
-  border-radius: 7px;
+  width: 100%;
   background-color: rgba(44, 136, 217, 255) !important;
   text-align: center;
 }
@@ -41,6 +37,7 @@ body{
 }
 
 .inputs {
+  width: 100%;
   margin: 40px auto;
   display: flex;
   flex-direction: column;
@@ -115,23 +112,25 @@ td:first-of-type {
 
 input[type=radio] {
   width: 75px;
-  height: 75px;
+  height: 50px;
 }
 
 .tooltip-container {
-    position: relative;
+    /* position: relative; */
     display: inline-block;
   }
   
   .tooltip-text {
     visibility: hidden;
     position: absolute;
-    background-color: rgb(87, 86, 86);
+    background-color: rgb(2, 2, 2);
     color: white;
-    padding: 5px;
+    padding: 7px;
     border-radius: 5px;
     z-index: 1;
     font-size: 15px;
+    width: 30%;
+    font-family: Arial, Helvetica, sans-serif;
   }
   
   .tooltip-container:hover .tooltip-text {
@@ -156,28 +155,40 @@ input[type=radio] {
     background-color: rgb(51, 143, 107);
     border-radius: 7px;
     padding: 10px;
+    margin-bottom: 40px;
     color: white;
   }
   
   .totalCostText {
-    background-color: rgb(33, 36, 35);
+    /* background-color: rgb(33, 36, 35); */
     border-radius: 7px;
     padding: 10px;
     margin-right: 10px;
-    color: white;
+    margin-bottom: 40px;
+    /* color: white; */
   }
   
   /* form starting stylings ------------------------------- */
   .group        { 
-  
     position: relative; 
-    margin-bottom: 45px; 
+    margin-top: 30px;
+    margin-bottom: 30px; 
   }
+
+.totalDiv {
+  /* width: 100%; */
+  margin: 40px auto;
+  display: flex;
+  justify-content: center;
+  /* flex-direction: column; */
+  align-items: center;
+}
+
   input         {
     font-size:18px;
     padding:10px 10px 10px 5px;
     display:block;
-    width:300px;
+    width: 500px;
     border:none;
     border-bottom:1px solid #757575;
   }
@@ -186,7 +197,7 @@ input[type=radio] {
   /* LABEL ======================================= */
   label          {
     color:#999; 
-    font-size:18px;
+    font-size: 24px;
     font-weight:normal;
     position:absolute;
     pointer-events:none;
@@ -205,7 +216,7 @@ input[type=radio] {
   }
   
   /* BOTTOM BARS ================================= */
-  .bar  { position:relative; display:block; width:300px; }
+  .bar  { position:relative; display:block; width:500px; }
   .bar:before, .bar:after   {
     content:'';
     height:2px; 

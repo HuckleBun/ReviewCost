@@ -74,7 +74,7 @@
       });
       $("#firstInput, #radio").change(function () {
         finalResult = total + total3;
-        $("#estimateCost").val(Math.floor(finalResult));
+        $(".totalCostBox").html("$" + Math.floor(finalResult));
       });
     });
   </script>
@@ -101,14 +101,14 @@
         </div> -->
 
         <div class="group">
-          <input type="text" required />
+          <input type="text" id="firstInput" required />
           <span class="highlight"></span>
           <span class="bar"></span>
           <label>Number of Documents to Review</label>
         </div>
 
         <div class="group">
-          <input type="text" required />
+          <input type="text" required disabled />
           <span class="highlight"></span>
           <span class="bar"></span>
           <label>Number of Document Review Attorneys</label>
@@ -152,7 +152,8 @@
             name="row-1"
             value="0.7"
             data-col="1"
-          /><i class="tooltip-container fa-solid fa-circle-info">
+          />
+          <i class="tooltip-container fa-solid fa-circle-info">
             <span class="tooltip-text"
               >Assumes a document type mix and coding workflows that allow for
               high rate of review. Assumes minimal issue codes. Typical of
@@ -183,7 +184,7 @@
       </tr>
       <tr>
         <td style="font-weight: bold; font-size: larger">
-          Doc Review Training
+          Doc Review Training ...
         </td>
         <td>
           <input
@@ -192,6 +193,7 @@
             name="row-2"
             value="200"
             data-col="1"
+            onclick="this.checked = false;"
           /><i class="fa-solid fa-circle-info"></i>
         </td>
         <td>
@@ -201,6 +203,7 @@
             name="row-2"
             value="200"
             data-col="2"
+            onclick="this.checked = false;"
           /><i class="fa-solid fa-circle-info"></i>
         </td>
         <td>
@@ -210,6 +213,7 @@
             name="row-2"
             value="600"
             data-col="3"
+            onclick="this.checked = false;"
           /><i class="fa-solid fa-circle-info"></i>
         </td>
       </tr>
@@ -349,9 +353,9 @@
         />
       </div> -->
 
-      <div style="display: flex">
+      <div class="totalDiv">
         <h1 class="totalCostText">Total Cost Estimate:</h1>
-        <h1 class="totalCostBox">$100,000</h1>
+        <h1 class="totalCostBox">$0</h1>
       </div>
     </section>
   </body>
