@@ -5,13 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Review Cost Calculator</title>
-    <link rel="stylesheet" href="./assets/css/style.css" />
-    <!-- <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous"
-    /> -->
+    <link rel="stylesheet" href="./style.css" />
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
@@ -19,6 +14,8 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=League+Spartan&display=swap">
+
   </head>
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
@@ -32,63 +29,197 @@
     referrerpolicy="no-referrer"
   ></script>
   <script>
-    $(document).ready(function () {
-      let total = 0;
-      let finalResult = 0;
-      $("#firstInput, #radio").change(function () {
-        let y = 0;
-        let x = Number($("#firstInput").val());
-        $("input[id='radio']:checked").each(function () {
-          y += +this.value;
-        });
-        total = x * y;
-      });
-      let total3 = 0;
-      $('#secondInput, input[name="optradio2"]').change(function () {
-        let total2 = 0;
-        let value1 = 3000;
-        let value2 = 4500;
-        let z = Number($("#secondInput").val());
-        let y2 = Number($("input[name='optradio2']:checked").val());
-        total2 = z * y2;
-        if (
-          $("input[name='optradio2']:checked")[0] ==
-          $("input[id='radio2']:checked")[0]
-        ) {
-          total3 = total2;
-        } else if (
-          $("input[name='optradio2']:checked")[0] ==
-          $("input[id='radio3']:checked")[0]
-        ) {
-          total3 = total2 + value1;
-        } else if (
-          $("input[name='optradio2']:checked")[0] ==
-          $("input[id='radio4']:checked")[0]
-        ) {
-          total3 = total2 + value2;
-        }
-      });
-      $('#secondInput, input[name="optradio2"]').change(function () {
-        finalResult = total + total3;
-        $("#estimateCost").val(Math.floor(finalResult));
-      });
-      $("#firstInput, #radio").change(function () {
-        finalResult = total + total3;
-        $("#estimateCost").val(Math.floor(finalResult));
-      });
-    });
+$(document).ready(function () {
+  let total = 0;
+  let total3 = 0;
+  let finalResult = 0;
+
+
+
+$(document).find("input[type='radio']:checked").addClass("bounce");
+
+    $("input[type='radio']").click(function () {
+
+        $(this).prop("checked", false);
+
+        $(this).toggleClass("bounce");
+
+
+
+  if ($(this).hasClass("bounce")) {
+
+    $(this).prop("checked", true);
+    $("input[type='radio']:not(:checked)").removeClass("bounce");
+
+    $(document)
+
+      .find("input:not(:checked)[type='radio']")
+
+      .removeClass("bounce");
+
+  }
+  updateTotal();
+
+});
+function updateTotal() {
+  let x = Number($("#firstInput").val());
+  let y = 0;
+  $("input[id='radio']:checked").each(function() {
+    y += +this.value;
+  });
+
+  let z = Number($("#secondInput").val());
+
+  total = x * y;
+
+  let selectedRow2Value = 0;
+  $("input[name='row-2']:checked").each(function() {
+    selectedRow2Value += Number($(this).val());
+  });
+
+  let row31 = z * (5 * 40);
+  let row32 = z * (5 * 40) + (2 * 10 * 150);
+  let row33 = z * (15 * 40) + (2 * 15 * 150);
+
+  if ($("#radio2").is(":checked") && !$("#radio3").is(":checked") && !$("#radio4").is(":checked")) {
+    total3 = row31;
+  } else if ($("#radio3").is(":checked") && !$("#radio2").is(":checked") && !$("#radio4").is(":checked")) {
+    total3 = row32;
+  } else if ($("#radio4").is(":checked") && !$("#radio2").is(":checked") && !$("#radio3").is(":checked")) {
+    total3 = row33;
+  } else if ($("#radio2").is(":checked") && $("#radio3").is(":checked") && !$("#radio4").is(":checked")) {
+    total3 = row31 + row32;
+  } else if ($("#radio2").is(":checked") && !$("#radio3").is(":checked") && $("#radio4").is(":checked")) {
+    total3 = row31 + row33;
+  } else if (!$("#radio2").is(":checked") && $("#radio3").is(":checked") && $("#radio4").is(":checked")) {
+    total3 = row32 + row33;
+  } else if (!$("#radio2").is(":checked") && !$("#radio3").is(":checked") && !$("#radio4").is(":checked")) {
+    total3 = 0;
+  } else if ($("#radio2").is(":checked") && $("#radio3").is(":checked") && $("#radio4").is(":checked")) {
+    total3 = row31 + row32 + row33;
+  }
+
+  finalResult = total + total3;
+
+  $("#estimateCost").val(
+    `$${Math.round(finalResult)
+      .toString()
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`
+  );
+}
+
+  $("input[name='row-2']").click(function () {
+  updateTotal();
+});
+
+  $('#secondInput').change(function () {
+    updateTotal();
+  });
+
+  $("#firstInput, #radio").change(function () {
+    updateTotal();
+    let y = 0;
+
+    let x = Number($("#firstInput").val());
+    $("input[id='radio']:checked").each(function () { y += +this.value; });
+    total = (x * y);
+    finalResult = total + total3;
+    $("#estimateCost").val(`$${Math.round(finalResult).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`);
+
+    let button1 = Number($("#firstInput").val())*0.7;
+    $("#firstbutton").val(`$${Math.round(button1).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`);
+    $("#button1Result").text(`$${Math.round(button1).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`); 
+
+    let button2 = Number($("#firstInput").val())*1;
+    $("#secondbutton").val(Math.round(button2));
+    $("#button2Result").text(`$${Math.round(button2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`); 
+
+    let button3 = Number($("#firstInput").val())*1.9;
+    $("#firstbutton").val(Math.round(button3));
+    $("#button3Result").text(`$${Math.round(button3).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`); 
+
+    let button4 = Number($("#firstInput").val())*0.05;
+    $("#secondbutton").val(Math.round(button4));
+    $("#button4Result").text(`$${Math.round(button4).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`); 
+
+    let button5 = Number($("#firstInput").val())*0.35;
+    $("#firstbutton").val(Math.round(button5));
+    $("#button5Result").text(`$${Math.round(button5).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`); 
+
+    let button6 = Number($("#firstInput").val())*0.65;
+    $("#secondbutton").val(Math.round(button6));
+    $("#button6Result").text(`$${Math.round(button6).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`); 
+
+    let button7 = Number($("#firstInput").val())*0.02;
+    $("#firstbutton").val(Math.round(button7));
+    $("#button7Result").text(`$${Math.round(button7).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`); 
+
+    let button8 = Number($("#firstInput").val())*0.125;
+    $("#secondbutton").val(Math.round(button8));
+    $("#button8Result").text(`$${Math.round(button8).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`); 
+
+    let button9 = Number($("#firstInput").val())*0.275;
+    $("#firstbutton").val(Math.round(button9));
+    $("#button9Result").text(`$${Math.round(button9).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`); 
+
+    let button10 = Number($("#firstInput").val())*0.01;
+    $("#secondbutton").val(Math.round(button10));
+    $("#button10Result").text(`$${Math.round(button10).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`); 
+
+    let button11 = Number($("#firstInput").val())*0.1;
+    $("#firstbutton").val(Math.round(button11));
+    $("#button11Result").text(`$${Math.round(button11).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`); 
+
+    let button12 = Number($("#firstInput").val())*0.3;
+    $("#secondbutton").val(Math.round(button12));
+    $("#button12Result").text(`$${Math.round(button12).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`); 
+
+    let button13 = Number($("#firstInput").val())*0.01;
+    $("#firstbutton").val(Math.round(button13));
+    $("#button13Result").text(`$${Math.round(button13).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`); 
+
+    let button14 = Number($("#firstInput").val())*0.05;
+    $("#secondbutton").val(Math.round(button14));
+    $("#button14Result").text(`$${Math.round(button14).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`); 
+
+    let button15 = Number($("#firstInput").val())*0.15;
+    $("#firstbutton").val(Math.round(button15));
+    $("#button15Result").text(`$${Math.round(button15).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`); 
+
+ 
+    
+})
+
+
+$('#secondInput, input[name="row-2"]').change(function() {
+  let total2 = 0;
+  let docval1 = 5 * 40;
+  let docval2 = 3000;
+  let docval3 = 4500;
+  let docval4 = 600;
+  let value1 = 3000;
+  let value2 = 4500;
+  let z = Number($("#secondInput").val());
+  let row31 = Number($("#secondInput").val()) * 5 * 40;
+  $("#button31Result").text(`$${Math.round(row31).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`);
+  let row32 = Number($("#secondInput").val()) * (5 * 40) + (2 * 10 * 150);
+  $("#button32Result").text(`$${Math.round(row32).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`);
+  let row33 = Number($("#secondInput").val()) * (15 * 40) + (2 * 15 * 150);
+  $("#button33Result").text(`$${Math.round(row33).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`);
+  let y2 = Number($("input[name='row-2']:checked").val());
+  
+  
+});
+});
   </script>
   <body>
     <div id="estimateContainer">
       <h1 id="estimateTitle">Estimate Your Document Review Costs</h1>
     </div>
 
-    <!-- <div class="bubbly">
-      <input type="text" placeholder="100000" />
-    </div> -->
 
     <section class="inputs">
-      <!-- <div>
+      <div>
         <div class="docInput">
           <label for="input1">Number of documents to review</label>
           <input
@@ -96,264 +227,657 @@
             name="input1"
             type="text"
             style="text-align: center"
-            placeholder="1000000"
+            
           />
-        </div> -->
-
-        <div class="group">
-          <input type="text" required />
-          <span class="highlight"></span>
-          <span class="bar"></span>
-          <label>Number of Documents to Review</label>
         </div>
 
-        <div class="group">
-          <input type="text" required />
-          <span class="highlight"></span>
-          <span class="bar"></span>
-          <label>Number of Document Review Attorneys</label>
-        </div>
-
-        <!-- <div class="attInput">
+        <div class="attInput">
           <label for="input2">Number of document review attorneys</label>
           <input
             id="secondInput"
             name="input2"
             type="text"
             style="text-align: center"
-            placeholder="100"
+            
           />
-        </div> -->
+        </div>
       </div>
     </section>
-
-    <!-- <section class="workflows row align-items-center no-gutters" id="randomOne">
-        <div class="container">
-          <h5>Doc Review Training</h5>
-          <input id="optRadio2" type="radio" name="optradio2" value="200" />
-          <input id="optRadio3" type="radio" name="optradio2" value="200" />
-          <input id="optRadio4" type="radio" name="optradio2" value="600" />
-        </div>
-    </section> -->
-
     <table>
-      <tr>
+      <tr> 
+        
         <th></th>
         <th>Low</th>
         <th>Average</th>
         <th>High</th>
+        
       </tr>
       <tr>
         <td style="font-weight: bold; font-size: larger">First Pass Review</td>
-        <td>
-          <input
-            id="radio"
-            type="radio"
-            name="row-1"
-            value="0.7"
-            data-col="1"
-          /><i class="tooltip-container fa-solid fa-circle-info">
-            <span class="tooltip-text"
-              >Assumes a document type mix and coding workflows that allow for
-              high rate of review. Assumes minimal issue codes. Typical of
-              primarily email reviews with minimal attachments and/or workflows
-              that allow for family coding. Rate of review assumption = 50+
-              documents/hour.</span
-            >
-          </i>
+        <td> 
+          
+          <div class="table-cell">
+            <input
+              id="radio"
+              id="firstbutton"
+              type="radio"
+              name="row-1"
+              value="0.7"
+              data-col="1"
+            />
+            <i style= "margin-left: 30px;" class="tooltip-container fa-solid fa-circle-info">
+              <span class="tooltip-text"
+                >Assumes a document type mix and coding workflows that allow for
+                high rate of review. Assumes minimal issue codes. Typical of
+                primarily email reviews with minimal attachments and/or workflows
+                that allow for family coding. Rate of review assumption = 50+
+                documents/hour.</span>
+              <p><span id="button1Result"></span></p>
+            </i>
+          </div>
         </td>
+      
         <td>
-          <input
-            id="radio"
-            type="radio"
-            name="row-1"
-            value="1"
-            data-col="2"
-          /><i class="fa-solid fa-circle-info"></i>
+          <div class="table-cell">
+            <input
+              id="radio"
+              type="radio"
+              name="row-1"
+              value="1"
+              data-col="2"
+            />
+            <i style= "margin-left: 30px;" class="tooltip-container fa-solid fa-circle-info">
+              <span class="tooltip-text"
+                >Assumes a standard document mix, typical workflows and issue codes. Rate of review assumption = 35 documents/hour
+                </span>
+              <p><span id="button2Result"></span></p>
+            </i>
+          </div>
         </td>
+        
         <td>
-          <input
-            id="radio"
-            type="radio"
-            name="row-1"
-            value="1.9"
-            data-col="3"
-          /><i class="fa-solid fa-circle-info"></i>
+          <div class="table-cell">
+            <input
+              id="radio"
+              type="radio"
+              name="row-1"
+              value="1.9"
+              data-col="3"
+            />
+            <i style= "margin-left: 30px;" class="tooltip-container fa-solid fa-circle-info">
+              <span  class="tooltip-text"
+                >Assumes a non-standard document mix and/or abnormal workflows, such as above average percentages of large or non-standard files, a high number of issue codes, or abnormally high responsiveness rates. Rate of review assumption = 20 documents/hour
+                </span>
+              <p><span id="button3Result"></span></p>
+            </i>
+          </div>
         </td>
       </tr>
-      <tr>
         <td style="font-weight: bold; font-size: larger">
           Doc Review Training
         </td>
+
         <td>
-          <input
-            id="radio2"
-            type="radio"
-            name="row-2"
-            value="200"
-            data-col="1"
-          /><i class="fa-solid fa-circle-info"></i>
-        </td>
+  <div class="table-cell">
+    <input
+      id="radio2"
+      type="radio"
+      name="row-2"
+      value="200"
+      data-col="1"
+    />
+  
+    <i style="margin-left: 30px;" class="tooltip-container fa-solid fa-circle-info">
+      <span class="tooltip-text">Assumes participation in team training only with no protocol or team training preparation.</span>
+      <p><span id="button31Result"></span></p>
+    </i>
+  </div>
+</td>
         <td>
+          <div class="table-cell">
           <input
             id="radio3"
             type="radio"
             name="row-2"
             value="200"
             data-col="2"
-          /><i class="fa-solid fa-circle-info"></i>
+          /><i style= "margin-left: 30px;" class="tooltip-container fa-solid fa-circle-info">
+            <span class="tooltip-text"
+              >Assumes drafting a document review protocol and preparing for and conducting document review team training. 
+              </span
+              
+            >
+            <p><span id="button32Result"></span></p>
+          </i>
+        </div>
         </td>
         <td>
+          <div class="table-cell">
           <input
             id="radio4"
             type="radio"
             name="row-2"
             value="600"
             data-col="3"
-          /><i class="fa-solid fa-circle-info"></i>
+          /><i style= "margin-left: 30px;" class="tooltip-container fa-solid fa-circle-info">
+            <span class="tooltip-text"
+              >Assumes multiple team trainings and development of multiple document review team protocols for various workflows/project phases. Includes an average of 3 additional training protocols/sessions
+              </span
+              
+            >
+            <p><span id="button33Result"></span></p>
+          </i>
+        </div>
         </td>
       </tr>
       <tr>
+        
         <td style="font-weight: bold; font-size: larger">
           Second Pass/Doc Review QC
         </td>
         <td>
+        <div class="table-cell">
           <input
             id="radio"
             type="radio"
             name="row-3"
             value="0.05"
             data-col="1"
-          /><i class="fa-solid fa-circle-info"></i>
+          /><i style= "margin-left: 30px;" class="tooltip-container fa-solid fa-circle-info">
+            <span class="tooltip-text"
+              >Assumes second-level QC of 5% of the reviewable items and no additional targeted QC workflows.
+              </span
+              
+            >
+            <p><span id="button4Result"></span></p>
+          </i>
+        </div>
         </td>
+
+
+
+
+
         <td>
+          <div class="table-cell">
           <input
             id="radio"
             type="radio"
             name="row-3"
             value="0.35"
             data-col="2"
-          /><i class="fa-solid fa-circle-info"></i>
+          /><i style= "margin-left: 30px;" class="tooltip-container fa-solid fa-circle-info">
+            <span class="tooltip-text"
+              >Assumes second-level QC of 10% of the reviewable items and average targeted QC and privilege workflows
+              
+              </span>
+            <p><span id="button5Result"></span></p>
+          </i>
+          </div>
         </td>
+
+
+
+
         <td>
+          <div class="table-cell">
           <input
             id="radio"
             type="radio"
             name="row-3"
             value="0.65"
             data-col="3"
-          /><i class="fa-solid fa-circle-info"></i>
+          /><i style= "margin-left: 30px;" class="tooltip-container fa-solid fa-circle-info">
+            <span class="tooltip-text"
+              >Assumes second-level QC of 20% of the reviewable items and enhanced or abnormally high targeted QC workflows and/or high levels of privilege QC.
+              </span
+              
+            >
+            <p><span id="button6Result"></span></p>
+          </i>
+          </div>
         </td>
       </tr>
       <tr>
         <td style="font-weight: bold; font-size: larger">Privilege Log</td>
         <td>
+          <div class="table-cell">
           <input
             id="radio"
             type="radio"
             name="row-4"
             value="0.02"
             data-col="1"
-          /><i class="fa-solid fa-circle-info"></i>
+          /><i style= "margin-left: 30px;" class="tooltip-container fa-solid fa-circle-info">
+            <span class="tooltip-text"
+              >Assumed automated privilege log generation and minimal QC sampling.
+              </span
+              
+            >
+            <p><span id="button7Result"></span></p>
+          </i>
+          </div>
         </td>
         <td>
+          <div class="table-cell">
           <input
             id="radio"
             type="radio"
             name="row-4"
             value="0.125"
             data-col="2"
-          /><i class="fa-solid fa-circle-info"></i>
+          /><i style= "margin-left: 30px;" class="tooltip-container fa-solid fa-circle-info">
+            <span class="tooltip-text"
+              >Assumes automated privilege log generation with manual corrections/QC of entire log.
+              </span
+              
+            >
+            <p><span id="button8Result"></span></p>
+          </i>
+          </div>
         </td>
         <td>
+          <div class="table-cell">
           <input
             id="radio"
             type="radio"
             name="row-4"
             value="0.275"
             data-col="3"
-          /><i class="fa-solid fa-circle-info"></i>
+          /><i style= "margin-left: 30px;" class="tooltip-container fa-solid fa-circle-info">
+            <span class="tooltip-text"
+              >Assumes automated  or manual privilege log generation, manual corrections/QC of log, and multiple privilege logs for various privilege workflows.
+              </span
+              
+            >
+            <p><span id="button9Result"></span></p>
+          </i>
+          </div>
         </td>
       </tr>
       <tr>
         <td style="font-weight: bold; font-size: larger">Redactions</td>
         <td>
+          <div class="table-cell">
           <input
             id="radio"
             type="radio"
             name="row-5"
             value="0.01"
             data-col="1"
-          /><i class="fa-solid fa-circle-info"></i>
+          /><i style= "margin-left: 30px;" class="tooltip-container fa-solid fa-circle-info">
+            <span class="tooltip-text"
+              >Assumes no or minimal redaction work
+              </span
+              
+            >
+            <p><span id="button10Result"></span></p>
+          </i>
+          </div>
         </td>
         <td>
+          <div class="table-cell">
           <input
             id="radio"
             type="radio"
             name="row-5"
             value="0.1"
             data-col="2"
-          /><i class="fa-solid fa-circle-info"></i>
+          /><i style= "margin-left: 30px;" class="tooltip-container fa-solid fa-circle-info">
+            <span class="tooltip-text"
+              >Assumes average volumes and rates of redaction
+              </span
+              
+            >
+            <p><span id="button11Result"></span></p>
+          </i>
+          </div>
         </td>
         <td>
+          <div class="table-cell">
           <input
             id="radio"
             type="radio"
             name="row-5"
             value="0.3"
             data-col="3"
-          /><i class="fa-solid fa-circle-info"></i>
+          /><i style= "margin-left: 30px;" class="tooltip-container fa-solid fa-circle-info">
+            <span class="tooltip-text"
+              >Assumes complex redaction workflows or abnormally high percentage of documents requiring redaction and/or numerous large redaction documents.
+              </span
+              
+            >
+            <p><span id="button12Result"></span></p>
+          </i>
+          </div>
         </td>
       </tr>
       <tr>
         <td style="font-weight: bold; font-size: larger">Production QC</td>
         <td>
+          <div class="table-cell">
           <input
             id="radio"
             type="radio"
             name="row-6"
             value="0.01"
             data-col="1"
-          /><i class="fa-solid fa-circle-info"></i>
+          /><i style= "margin-left: 30px;" class="tooltip-container fa-solid fa-circle-info">
+            <span class="tooltip-text"
+              >Assumes no or minimal production QC
+              </span
+              
+            >
+            <p><span id="button13Result"></span></p>
+          </i>
+          </div>
         </td>
         <td>
+          <div class="table-cell">
           <input
             id="radio"
             type="radio"
             name="row-6"
             value="0.05"
             data-col="2"
-          /><i class="fa-solid fa-circle-info"></i>
+          /><i style= "margin-left: 30px;" class="tooltip-container fa-solid fa-circle-info">
+            <span class="tooltip-text"
+              >Assumes average production QC 
+              </span
+              
+            >
+            <p><span id="button14Result"></span></p>
+          </i>
+          </div>
         </td>
         <td>
+          <div class="table-cell">
           <input
             id="radio"
             type="radio"
             name="row-6"
             value="0.15"
             data-col="3"
-          /><i class="fa-solid fa-circle-info"></i>
+          /><i style= "margin-left: 30px;" class="tooltip-container fa-solid fa-circle-info">
+            <span class="tooltip-text"
+              >Assumes multiple production workflows and high levels of production QC.
+              </span
+              
+            >
+            <p><span id="button15Result"></span></p>
+          </i>
+          </div>
         </td>
       </tr>
     </table>
 
     <section>
-      <!-- <div class="attInput">
+      <div class="attInput">
         <label for="estimateCost">Total Estimated Cost:</label>
         <input
+
           name="estimateCost"
           id="estimateCost"
           type="text"
           style="text-align: center"
           disabled
         />
-      </div> -->
-
-      <div style="display: flex">
-        <h1 class="totalCostText">Total Cost Estimate:</h1>
-        <h1 class="totalCostBox">$100,000</h1>
       </div>
     </section>
+
+    <style>
+      * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+  
+  body {
+    background-color: #EAEAEA;
+   
+  }
+  
+  #estimateContainer {
+
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 20px;
+    
+  }
+  
+  #estimateTitle {
+    color: #357891;
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    
+  }
+  
+  .inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
+  
+  }
+
+  .docInput,
+.attInput {
+  color: #007acc;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40px; 
+  background-color: #EAEAEA;
+  border-radius: 20px;
+  box-shadow: 0 0 0 0.5px rgba(#357891);
+  padding: 20px;
+  max-width: 500px;
+  width: 100%;
+}
+
+  label {
+    color: #999;
+    font-size: 18px;
+    font-weight: normal;
+    position: relative;
+    margin-bottom: 10px;
+   
+  }
+  
+  input[type="text"] {
+    
+    font-size: 18px;
+    padding: 10px 15px;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #757575;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    transition: border-color 0.2s ease-in-out;
+    
+  }
+  
+  input[type="text"]:focus {
+    outline: none;
+    border-bottom: 4px solid #357891;
+  }
+  
+  input[type="text"] {
+    color: #357891;
+    font-size: 18px;
+  }
+  
+  input[type="submit"] {
+    background-color: #357891;
+    color: #EAEAEA;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 30px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #357891;
+  }
+  
+  #title {
+    text-align: center;
+  }
+  
+  #titleBody {
+    text-align: center;
+  }
+  
+  #estimateContainer {
+    
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 25px;
+  }
+  
+  
+  #workflowText {
+    text-align: center;
+    padding-bottom: 25px;
+    padding-top: 25px;
+  }
+  
+  .workflows {
+    width: 100%;
+    background-color: white;
+    flex-direction: column;
+  }
+  
+  table {
+    border-collapse: collapse;
+    margin: auto;
+  }
+  
+  td,
+  th {
+    border-bottom: 1px solid rgb(186, 186, 194);
+    padding: 25px;
+    text-align: center;
+    vertical-align: middle;
+  }
+  
+  
+  th:empty {
+    border: 0;
+  }
+  
+  td:first-of-type {
+    width: 50%;
+  }
+
+  .tooltip-icon{
+    position: relative;
+    display: inline-block;
+ 
+  }
+  
+  .tooltip-container {
+    position: relative;
+    display: inline-block;
+  }
+
+  .tooltip-container .tooltip-text {
+    opacity: 0;
+    width: 200px;
+    background-color: #EAEAEA;
+    color: #357891; 
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -100px;
+    font-size: 18px;
+    font-family: Arial, sans-serif;
+    transition: opacity 0.2s ease-in-out;
+    pointer-events: none;
+  }
+  
+  .tooltip-container:hover .tooltip-text {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  
+  i {
+    font-family: 'Times New Roman';
+    font-size: 1em;
+    color: #357891;
+    position: absolute;
+    padding-left: 25px;
+    
+    
+  }
+
+  body, h1, h2, h3, h4, h5, h6, label, input[type="text"], input[type="submit"], th, td, i {
+  font-family: "League Spartan", Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+
+  #estimateCost {
+    box-shadow: 0 0 0 1px #357891;
+  }
+
+  #firstInput {
+    box-shadow: #357891;
+    
+  }
+  #secondInput{
+    box-shadow: #357891;
+
+  }
+
+  input[type="radio"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 40px;
+    position: absolute;
+    height: 40px;
+    border: 2px solid #0066CC; 
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  input[type="radio"]:checked:before{
+    content: "\2713"; 
+    transform: scale(1.2);
+    display: block;
+    text-align: center;
+    font-size: 40px;
+    color: #357891; 
+    line-height: 18px;
+    position: absolute;
+    left: 5px; 
+  }
+
+  .table-cell {
+    width: 200px; 
+    display: flex;
+    align-items: center;
+  }
+    </style>
+
   </body>
   <footer></footer>
 </html>
